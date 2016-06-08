@@ -23,7 +23,7 @@ function allEquipmentsShow(id, k) {
     var td3 = document.createElement("td");
     td3.appendChild(document.createTextNode(array[k].quantity));
     var td4 = document.createElement("td");
-    var button = createButtonAdd(td4, k);
+    var button = createButton(td4, k, 'javascript:EquipmentsAdd("all-equipments-id", "sel-equipments-id", ' + k + ')', '+');
  
     row.appendChild(td1);
     row.appendChild(td2);
@@ -33,29 +33,15 @@ function allEquipmentsShow(id, k) {
     tbody.appendChild(row);
 }
 
-function createButtonAdd(context, l){
+function createButton(context, l, fun, value){
     var button = document.createElement("input");
     button.type = "button";
-    button.value = "+";
+    button.value = value;
     button.className = "add add-"+l;
     button.id = "idadd-"+ l;
 
     context.appendChild(button);
-    button.setAttribute('onclick', 'javascript:EquipmentsAdd("all-equipments-id", "sel-equipments-id", ' + l + ')');
-
-}
-
-// по кнопкам так же бъединить в одну функцию
-
-function createButtonRem(context, l){
-    var button = document.createElement("input");
-    button.type = "button";
-    button.value = "-";
-    button.className = "remowe remowe-"+l;
-    button.id = "idrem-"+ l;
-
-    context.appendChild(button);
-    button.setAttribute('onclick', 'javascript:EquipmentsRem("all-equipments-id", "sel-equipments-id", ' + l + ')');
+    button.setAttribute('onclick', fun);
 
 }
 
@@ -78,9 +64,6 @@ function EquipmentsAdd(from ,id, k) {
 
 	array[k].quantity = array[k].quantity - 1;
 	var count = 1;
-	
-
-
 
 if (selectArray.length == 0) {
 
@@ -102,7 +85,7 @@ selectArray.push({title:array[k].title , prise: array[k].prise, quantity: count}
 }
 }
 
-alert(selectArray.length );//1
+
 
 /*
 // ПОЧЕМУ НЕ УДАЛЯЮТСЯ ВСЕ ЭТИ ЧЕРТОВЫ СТРОКИ. 
@@ -119,23 +102,24 @@ if (selectArray.length > 0) {
  	var tbody = document.getElementById(id).getElementsByTagName("tbody")[0];
     var row = document.createElement("tr");
 
-
     var td1 = document.createElement("td");
     td1.appendChild(document.createTextNode(array[k].title));
     var td3 = document.createElement("td");
     td3.appendChild(document.createTextNode(count));
     var td4 = document.createElement("td");
-    var button = createButtonRem(td4, k);
+    var button = createButton(td4, k, 'javascript:EquipmentsRem("all-equipments-id", "sel-equipments-id", ' + k + ', '+this+')', '-');
 
     row.appendChild(td1);
     row.appendChild(td3);
     row.appendChild(td4);
 
     tbody.appendChild(row);
+    row.classList.add("cl"+ row.rowIndex);
+
 
     for (var i = array.length-1; i >= 0; i--) {
 	document.getElementById(from).getElementsByTagName("tbody")[0].deleteRow(i+1);
-    }	
+	}
 
 
 	for (var i = array.length - 1; i >= 0; i--) {
@@ -144,13 +128,18 @@ if (selectArray.length > 0) {
 
 	}
 
+   // return row.rowIndex;
+
 }
 
-function EquipmentsRem(from ,id, k) {
+function EquipmentsRem(from ,id, k, row) {
 
-	array[k].quantity = array[k].quantity + 1;
+    array[k].quantity = array[k].quantity + 1;
+    //tr = row.parentNode.parentNode;
 
-	//document.getElementById(id).deleteRow(rowind);
+	//document.getElementById(id).deleteRow(tr.rowIndex);
+
+    // туту же удалить элемент из selectArray
 
 
 
@@ -185,11 +174,3 @@ for (var i = array.length - 1; i >= 0; i--) {
 }
 
 }
-
-
-
-
-
-
-
-
