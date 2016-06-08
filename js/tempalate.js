@@ -135,7 +135,7 @@ if (selectArray.length > 0) {
 
     for (var i = array.length-1; i >= 0; i--) {
 	document.getElementById(from).getElementsByTagName("tbody")[0].deleteRow(i+1);
-	
+    }	
 
 
 	for (var i = array.length - 1; i >= 0; i--) {
