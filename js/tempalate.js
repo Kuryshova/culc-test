@@ -78,6 +78,9 @@ function EquipmentsAdd(from ,id, k) {
 
 	array[k].quantity = array[k].quantity - 1;
 	var count = 1;
+	
+
+
 
 if (selectArray.length == 0) {
 
@@ -101,7 +104,7 @@ selectArray.push({title:array[k].title , prise: array[k].prise, quantity: count}
 
 alert(selectArray.length );//1
 
-
+/*
 // ПОЧЕМУ НЕ УДАЛЯЮТСЯ ВСЕ ЭТИ ЧЕРТОВЫ СТРОКИ. 
 if (selectArray.length > 0) {
 
@@ -110,7 +113,7 @@ if (selectArray.length > 0) {
 	}
 
 
-}
+}*/
 
 
  	var tbody = document.getElementById(id).getElementsByTagName("tbody")[0];
@@ -123,18 +126,16 @@ if (selectArray.length > 0) {
     td3.appendChild(document.createTextNode(count));
     var td4 = document.createElement("td");
     var button = createButtonRem(td4, k);
- 
+
     row.appendChild(td1);
     row.appendChild(td3);
     row.appendChild(td4);
 
     tbody.appendChild(row);
 
-
     for (var i = array.length-1; i >= 0; i--) {
 	document.getElementById(from).getElementsByTagName("tbody")[0].deleteRow(i+1);
-	}
-
+	
 
 
 	for (var i = array.length - 1; i >= 0; i--) {
