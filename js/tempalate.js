@@ -59,6 +59,16 @@ function createButtonRem(context, l){
 
 }
 
+
+function in_array(value, mas) 
+{
+    for(var i = 0; i < mas.length; i++) 
+    {
+        if(mas[i].title == value) return true;
+    }
+    return false;
+}
+
 function EquipmentsAdd(from ,id, k) {
 	if (array[k].quantity<=0) {
 
@@ -69,33 +79,38 @@ function EquipmentsAdd(from ,id, k) {
 	array[k].quantity = array[k].quantity - 1;
 	var count = 1;
 
-
-
-//if (selectArray.length = 0) {
+if (selectArray.length == 0) {
 
 	selectArray.push({title:array[k].title , prise: array[k].prise, quantity: count});
 
-/*} else {
+} else {
+
+if (in_array(array[k].title, selectArray)) {
+
 	for (var i = selectArray.length - 1; i >= 0; i--) {
 			if (selectArray[i].title==array[k].title) {
 				selectArray[i].quantity = selectArray[i].quantity + 1;
 				count = selectArray[i].quantity;
-			} else{
-			selectArray.push({title:array[k].title , prise: array[k].prise, quantity: count});	
 			}
 		}
+} else {
+
+selectArray.push({title:array[k].title , prise: array[k].prise, quantity: count});	
+}
 }
 
+alert(selectArray.length );//1
 
+
+// ПОЧЕМУ НЕ УДАЛЯЮТСЯ ВСЕ ЭТИ ЧЕРТОВЫ СТРОКИ. 
 if (selectArray.length > 0) {
 
-for (var i = selectArray.length; i > 0; i--) {
+    for (var i = array.length; i > 1; i--) { //1
 	document.getElementById(id).getElementsByTagName("tbody")[0].deleteRow(i);
+	}
+
+
 }
-
-}*/
-
-
 
 
  	var tbody = document.getElementById(id).getElementsByTagName("tbody")[0];
